@@ -16,11 +16,16 @@ class Program
         Console.WriteLine("Quanto tempo deseja contar?");
 
         string data = Console.ReadLine()!.ToLower();
+
+        int time = int.Parse(data.Substring(0, data.Length - 1));
+        char type = char.Parse(data.Substring(data.Length - 1, 1));
+
+        Console.WriteLine(time);
+        Console.WriteLine(type);
     }
 
-    static void Start()
+    static void Start(int time)
     {
-        int time = 10;
         int currentTime = 0;
 
         while (currentTime != time)
