@@ -4,7 +4,18 @@ class Program
 {
     static void Main(string[] args)
     {
-        Start();
+        Menu();
+    }
+
+    static void Menu()
+    {
+        Console.Clear();
+        Console.WriteLine("S = Segundos => 10s = 10 segundos");
+        Console.WriteLine("M = Minutos => 1m = 60 segundos");
+        Console.WriteLine("0 = Sair");
+        Console.WriteLine("Quanto tempo deseja contar?");
+
+        string data = Console.ReadLine()!.ToLower();
     }
 
     static void Start()
