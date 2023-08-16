@@ -20,8 +20,12 @@ class Program
         int time = int.Parse(data.Substring(0, data.Length - 1));
         char type = char.Parse(data.Substring(data.Length - 1, 1));
 
-        Console.WriteLine(time);
-        Console.WriteLine(type);
+        int multiplier = 1;
+
+        if (type == 'm') multiplier = 60;
+        if (time == 0) System.Environment.Exit(0);
+
+        Start(time * multiplier);
     }
 
     static void Start(int time)
@@ -35,6 +39,11 @@ class Program
             Console.WriteLine(currentTime);
             Thread.Sleep(1000);
         }
+
+        Console.Clear();
+        Console.WriteLine("Stopwatch finalizado. Aperte qualquer tecla para retornar ao menu.");
+        Console.ReadKey();
+        Menu();
     }
 }
 
