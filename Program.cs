@@ -4,10 +4,33 @@ class Program
 {
     static void Main(string[] args)
     {
-        Menu();
+        Pomodoro();
     }
 
-    static void Menu()
+    static void Pomodoro()
+    {
+        Console.Clear();
+        Console.WriteLine("Bem vindo ao método Pomodoro!");
+
+        Console.WriteLine("Quantos ciclos terá seu Pomodoro?");
+        short cycles = short.Parse(Console.ReadLine()!);
+
+        Console.WriteLine("Quantos minutos deseja focar em cada ciclo?");
+        int focusTime = int.Parse(Console.ReadLine()!);
+
+        Console.WriteLine("Quantos minutos deseja descansar entre cada ciclo?");
+        int restTime = int.Parse(Console.ReadLine()!);
+
+        Console.WriteLine("Quantos minutos deseja descansar ao fim do Pomodoro?");
+        int restPomodoro = int.Parse(Console.ReadLine()!);
+
+        for (int i = 0; i < cycles; i++)
+        {
+            Start(focusTime);
+        }
+    }
+
+    static void Timer()
     {
         Console.Clear();
         Console.WriteLine("S = Segundos => 10s = 10 segundos");
@@ -26,6 +49,10 @@ class Program
         if (time == 0) System.Environment.Exit(0);
 
         Start(time * multiplier);
+        Console.Clear();
+        Console.WriteLine("Stopwatch finalizado. Aperte qualquer tecla para retornar ao menu.");
+        Console.ReadKey();
+        Timer();
     }
 
     static void Start(int time)
@@ -39,11 +66,6 @@ class Program
             Console.WriteLine(currentTime);
             Thread.Sleep(1000);
         }
-
-        Console.Clear();
-        Console.WriteLine("Stopwatch finalizado. Aperte qualquer tecla para retornar ao menu.");
-        Console.ReadKey();
-        Menu();
     }
 }
 
