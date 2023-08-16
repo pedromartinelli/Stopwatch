@@ -11,21 +11,21 @@ class Program
     {
         Console.Clear();
         Console.WriteLine("Bem vindo! Selecione uma opção a seguir:");
-        Console.WriteLine("1 - timer");
-        Console.WriteLine("2 - pomodoro");
-        Console.WriteLine("3 - sair da aplicação");
+        Console.WriteLine("1 - Timer");
+        Console.WriteLine("2 - Pomodoro");
+        Console.WriteLine("3 - Sair da aplicação");
         short opcao = short.Parse(Console.ReadLine()!);
 
         switch (opcao)
         {
             case 1: Timer(); break;
-            case 2: Pomodoro(); break;
+            case 2: PomodoroMenu(); break;
             case 3: System.Environment.Exit(0); break;
             default: Menu(); break;
         }
     }
 
-    static void Pomodoro()
+    static void PomodoroMenu()
     {
         Console.Clear();
         Console.WriteLine("Bem vindo ao método Pomodoro!");
@@ -42,6 +42,13 @@ class Program
         Console.WriteLine("Quantos minutos deseja descansar ao fim do Pomodoro?");
         int restPomodoro = int.Parse(Console.ReadLine()!);
 
+        Pomodoro(cycles, focusTime, restTime, restPomodoro);
+    }
+
+    static void Pomodoro(short cycles, int focusTime, int restTime, int restPomodoro)
+    {
+        Console.Clear();
+
         int cycleCount = 0;
 
         while (cycleCount < cycles)
@@ -52,6 +59,22 @@ class Program
             if (cycleCount == cycles)
             {
                 Start(restPomodoro, "Descanse para o próximo pomodoro.");
+
+                Console.Clear();
+                Console.WriteLine("Parabéns! Você terminou o Pomodoro");
+                Console.WriteLine("1 - Reiniciar");
+                Console.WriteLine("2 - Configurar novamente o pomodoro e reiniciar");
+                Console.WriteLine("3 - Menu");
+
+                short opcao = short.Parse(Console.ReadLine()!);
+
+                switch (opcao)
+                {
+                    case 1: cycleCount = 0; break;
+                    case 2: PomodoroMenu(); break;
+                    case 3: Menu(); break;
+                    default: Menu(); break;
+                }
             }
             else
             {
