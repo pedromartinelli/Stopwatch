@@ -4,7 +4,25 @@ class Program
 {
     static void Main(string[] args)
     {
-        Pomodoro();
+        Menu();
+    }
+
+    static void Menu()
+    {
+        Console.Clear();
+        Console.WriteLine("Bem vindo! Selecione uma opção a seguir:");
+        Console.WriteLine("1 - timer");
+        Console.WriteLine("2 - pomodoro");
+        Console.WriteLine("3 - sair da aplicação");
+        short opcao = short.Parse(Console.ReadLine()!);
+
+        switch (opcao)
+        {
+            case 1: Timer(); break;
+            case 2: Pomodoro(); break;
+            case 3: System.Environment.Exit(0); break;
+            default: Menu(); break;
+        }
     }
 
     static void Pomodoro()
@@ -24,10 +42,27 @@ class Program
         Console.WriteLine("Quantos minutos deseja descansar ao fim do Pomodoro?");
         int restPomodoro = int.Parse(Console.ReadLine()!);
 
-        for (int i = 0; i < cycles; i++)
+        int cycleCount = 0;
+
+        while (cycleCount < cycles)
         {
-            Start(focusTime);
+            cycleCount++;
+            Start(focusTime, "Mantenha o foco!");
+
+            if (cycleCount == cycles)
+            {
+                Start(restPomodoro, "Descanse para o próximo pomodoro.");
+            }
+            else
+            {
+                Start(restTime, "Descanse para o próximo ciclo.");
+            }
         }
+
+        Console.Clear();
+        Console.WriteLine("Pomodoro finalizado. Aperte qualquer tecla para retornar ao menu.");
+        Console.ReadKey();
+        Menu();
     }
 
     static void Timer()
@@ -48,20 +83,21 @@ class Program
         if (type == 'm') multiplier = 60;
         if (time == 0) System.Environment.Exit(0);
 
-        Start(time * multiplier);
+        Start(time * multiplier, "");
         Console.Clear();
         Console.WriteLine("Stopwatch finalizado. Aperte qualquer tecla para retornar ao menu.");
         Console.ReadKey();
-        Timer();
+        Menu();
     }
 
-    static void Start(int time)
+    static void Start(int time, string? message)
     {
         int currentTime = 0;
 
         while (currentTime != time)
         {
             Console.Clear();
+            Console.WriteLine($"{message}");
             currentTime++;
             Console.WriteLine(currentTime);
             Thread.Sleep(1000);
